@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+
+    <div class="main">
+        <div id="piece-header" class="shadow-sm">
+            
+            <div style="display: flex; align-items: bottom;">
+            {% if profile.photo %}
+                <img style="height: 80px; border-radius: 12px;" src="{{ profile.photo }}">
+            {% endif %}
+            <h2 style="height: 80px; padding-left: 12px; padding-top: 45px;">
+                {{ profile.username }}{% if profile == request.user %}
+                <a class="btn btn-info" href="{% url 'complete_profile' %}">Edit</a>
+            {% endif %}
+            </h2>
+            
+            </div>
+        </div>
+        {% if profile.first_name %}<h3>{{ profile.first_name }} {{ profile.last_name }}</h3><hr>{% endif %}
+        <h4>Bio</h4>
+        <p>{{ profile.bio }}</p>
+        <h4>Primary genre</h4>
+        <p>{{ profile.genre }}</p>
+        <h4>Pieces</h4>
+        <ul class="list-group">   
+            {% for paper in user_papers %}
+                <li class="list-item" style="background-color: inherit;"><a class="nav-link" href="{% url 'index' paper.id %}">{{ paper.title }}</a></li>
+            {% endfor %}
+        </ul>
+        <h4>Influences</h4>
+        <p>{{ profile.influences }}</p>
+        <h4>Why I write</h4>
+        <p>{{ profile.why }}</p>
+        <h4>What I read for</h4>
+        <p>{{ profile.what }}</p>
+        <h4>Communities</h4>
+        <ul class="list-group">
+            {% for community in user_communities %}
+                <li class="list-item"><a class="nav-link" href="{% url 'community' community.name %}">{{ community.name }}</a>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}

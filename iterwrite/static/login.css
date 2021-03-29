@@ -1,0 +1,92 @@
+body {
+    background-color: #121212;
+    color: #ffffff;
+    font-family: 'Fira Code', monospace;
+  }
+
+  .large {
+    font-size: 100px;
+    margin: 0;
+    font-family: 'Ubuntu Mono', monospace;
+  }
+
+  .btn-outline-light:hover {
+      color: white;
+      background-color: #e23d28;
+  }
+  .medium {
+    font-size: 20px;
+  }
+  
+  .centered {
+    text-align: center;
+  }
+  
+  a {
+    color: #e23d28;
+    text-decoration: none;
+  }
+  a:hover {
+    color: #e23d28;
+    text-decoration: underline;
+  }
+  
+  .btn-primary {
+    background-color: #e23d28;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: white;
+    color: #e23d28;
+  }
+  
+  #w {
+    color: #e23d28;
+  }
+
+  .btn {
+      margin-top: 4px;
+  }
+
+  #forms {
+      margin-top: 20px;
+  }
+  
+  @keyframes fade {
+        0% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+  
+    #workshop {
+        color: #e23d28;
+        position: relative;
+        animation-name: fade;
+        animation-duration: 2s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+    }
+  
+    @media (max-width: 600px) {
+      html, body {
+        max-height: 600px;
+      }
+      .large {
+        font-size: 80px;
+      }
+      .medium {
+        font-size: 16px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: auto;
+      }
+    }
+  

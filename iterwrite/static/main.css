@@ -1,0 +1,55 @@
+body {
+    font-family: 'Fira Code', monospace;
+}
+
+.main {
+    margin: 160px 20px 0 380px;
+    overflow: hidden;
+}
+
+#piece-header {
+    min-height: 120px;
+    position: fixed;
+    left: 360px;
+    padding: 20px;
+    top: 0;
+    margin: 0;
+    background-image: linear-gradient(315deg, #bcbcbc 0%, #898989 74%);
+    color: white;
+    width: calc(100vw - 360px);
+    z-index: 100;
+}   
+
+.paper {
+    font-family: 'Montserrat', sans-serif;
+}
+#compose {
+    height: 100vh;
+}
+
+#sidebar {
+    background-color: #121212;
+    color: white;
+    height: 100vh;
+    width: 360px;
+    position: fixed;
+    top: 0;
+    padding: 20px;
+    overflow: scroll;
+}
+
+.nav-section {
+    margin: 20px 0;
+}
+
+#comments {
+    overflow: scroll;
+    margin-top: 16px;
+    max-height: calc(50vh - 120px);
+}
+
+.comment {
+    background-color: #ffffff;
+    color: #121212;
+    margin: 4px;
+}

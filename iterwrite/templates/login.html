@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>iter(w)rite</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&family=Source+Code+Pro:wght@200&family=Ubuntu+Mono&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="static/login.css">
+        
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const span = document.querySelector('#workshop');
+                var counter = 0;
+                const arr = ['lab', 'studio', 'group', 'hub', 'meetup', 'classroom', 'community', 'experiment', 'challenge', 'inspiration', 'solution', 'workshop'];
+
+                const loginButton = document.querySelector('#login-button');
+                const registerButton = document.querySelector('#register-button');
+                const loginForm = document.querySelector('#login');
+                const registerForm = document.querySelector('#register');
+                registerForm.style.display = 'none';
+
+                loginButton.onclick = function () {
+                    loginButton.className = 'btn btn-outline-light active';
+                    login.style.display = 'block';
+                    registerButton.className = 'btn btn-outline-light';
+                    registerForm.style.display = 'none';
+                }
+
+                registerButton.onclick = function () {
+                    registerButton.className = 'btn btn-outline-light active';
+                    register.style.display = 'block';
+                    loginButton.className = 'btn btn-outline-light';
+                    loginForm.style.display = 'none';
+                }
+
+                setInterval(function () {
+                    span.innerHTML = '&nbsp;' + arr[counter];
+                    if (counter < arr.length-1) {
+                        counter++;
+                    } else {
+                        counter = 0;
+                    }
+                }, 2000)
+            })
+        </script>
+	</head>
+	<body>
+        <div style="margin: 25vh 10vw;">
+            <h2 class="medium">the twenty-first-century writing <span id="workshop">&nbsp;workshop</span></h2>
+            <h1 class="large">iter<span id="w">(w)</span>rite</h1>
+            <div id="forms">
+                <div class="input-group">
+                    <button id="login-button" class="btn btn-outline-light active">Login</button>
+                    <button id="register-button" class="btn btn-outline-light">Register</button>
+                </div>
+                <form id="login" action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input autocomplete="off" autofocus class="form-control" type="text" name="username" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <input autocomplete="off" class="form-control" type="password" name="password" placeholder="Password">
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Login">
+                </form>
+
+                <form id="register" action="{% url 'register' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input class="form-control" autofocus type="text" name="username" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="email" name="email" placeholder="Email Address">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="password" name="password" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Register">
+                </form>
+            </div>
+        </div>
+
+
+
+	</body>
+</html>

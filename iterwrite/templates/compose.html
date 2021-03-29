@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+
+	<div id="piece-header" class="shadow-sm">
+		<h2>Compose New Piece</h2>
+		<form>
+			{% csrf_token %}
+			<div class="input-group">
+				<input id="title" type="text" class="form-control" name="title" value="{{ paper.title }}">
+				<a class="btn btn-primary" href="{% url 'index' paper_id=paper.id %}">Done</a>
+			</div>
+		</form>
+	</div>
+	<div class="main">
+		<div id="compose">
+		</div>
+	</div>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+
+			var compose = new Quill('#compose', {
+				placeholder: 'Compose an epic...',
+				theme: 'snow'
+        	});
+
+			document.querySelector('#compose').onkeyup = function() {
+				var content = document.querySelector('.ql-editor').innerHTML;
+				fetch(`edit`, {
+					method: 'PUT',
+					body: JSON.stringify({
+						id: {{ paper.id }},
+						content: content
+					}),
+					credentials: 'same-origin',
+					headers: {
+						"X-CSRFToken": getCookie("csrftoken")
+					}
+				})
+			}   
+
+			document.querySelector('#title').onkeyup = function() {
+				fetch('change_title', {
+					method: 'PUT',
+					body: JSON.stringify({
+						id: {{ paper.id }},
+						title: this.value
+					}),
+					credentials: 'same-origin',
+					headers: {
+						"X-CSRFToken": getCookie("csrftoken")
+					}
+				})
+			}
+
+		});
+	</script>
+{% endblock %}

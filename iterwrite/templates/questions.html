@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>iter(w)rite</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&family=Source+Code+Pro:wght@200&family=Ubuntu+Mono&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="static/login.css">
+	</head>
+	<body>
+		<div style="margin: 10vh 10vw">
+			<h1 class="large">iter<span id="w">(w)</span>rite</h1>
+			<h2>Complete your profile</h2>
+			<form action="{% url 'complete_profile' %}" method="post">
+				{% csrf_token %}
+				<label for="first" class="form-label">First name</label>
+                <input id="first" class="form-control" type="text" name="first_name" autofocus>
+				<label for="last" class="form-label">Last name</label>
+                <input id="last" class="form-control" type="text" name="last_name">
+				<label for="photo" class="form-label">Photo URL</label>
+				<input name="photo" id="photo" type="url" class="form-control" value="{{ user.photo }}">
+				<label for="bio" class="form-label">Bio</label>
+				<textarea id="bio" name="bio" class="form-control">{{ user.bio }}</textarea>
+				<label for="genre" class="form-label">Primary genre</label>
+				<input id="genre" name="genre" type="text" class="form-control" value="{{ user.genre }}">
+				<label for="influences" class="form-label">Influences</label>
+				<input id="influences" name="influences" type="text" class="form-control" value="{{ user.influences }}">
+				<label for="why" class="form-label">Why I write</label>
+				<textarea id="why" name="why" class="form-control">{{ user.why }}</textarea>
+				<label id="what" for="what" class="form-label">What I read for</label>
+				<textarea name="what" class="form-control">{{ user.what }}</textarea>
+				<input type="submit" class="btn btn-primary">
+				<a class="btn btn-secondary" href="{% url 'index' %}">Finish later</a>
+			</form>
+		</div>
+	</body>
+</html>

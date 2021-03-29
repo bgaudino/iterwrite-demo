@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+    <!-- main content -->
+
+    
+    {% if my_paper %}
+    <div id="piece-header" class="shadow-sm">
+        <div class="doc">
+            <h2 id="title">{{ my_paper.title }}<a style="color: white; text-decoration: none; font-size: medium;" href="{% url 'profile' my_paper.author.username %}">- {{ my_paper.author.username }}</a>
+            </h2>
+            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                <button id="edit" class="btn btn-info" {% if user != my_paper.author %} disabled {% endif %} onclick="edit({{ my_paper.id }}); return false;">Edit</button>
+                <button id="done" class="btn btn-danger" style="display: none;">Done</button>
+                <input type="submit" id="comment-toggle" type="button" {% if view == 'comments' %}class="btn btn-danger" value="Close" {% else %} class="btn btn-primary" value="Comments" {% endif %}>
+            </div>
+        </div>
+        <div id="comments" class="navbar-nav-scroll" {% if view == 'comments' %} style="display: block;" {% else %} style="display: none;" {% endif %}>
+            <form action="{% url 'add_comment' my_paper.id %}" id="comment-form" method="post">
+                {% csrf_token %}
+                <div class="input-group">
+                    <span id="selection-label" class="input-group-text" hidden>Selection</span>
+                    <input name="selection" type="text" id="selection" class="form-control" style="visibility: hidden;" readonly>
+                </div>
+                <textarea name="comment" class="form-control" placeholder="Leave a comment"></textarea>
+                <input type="submit" class="btn btn-primary" value="Send">
+            </form>
+            <form action="{% url 'filter_comments' %}" method="post">
+                {% csrf_token %}
+                <input hidden name="paper-id" type="number" value="{{ my_paper.id }}">
+                <select name="user-id" class="form-select" onchange="this.form.submit()">
+                    <option value="0">All comments</option>
+                    {% for commenter in commenters %}
+                        <option value="{{ commenter.id }}" {% if commenter.id == selected_value %} selected {% endif %}>{{ commenter.username }}</option>
+                    {% endfor %}
+                </select>
+            {% for comment in comments %}
+                <div class="comment shadow-sm p-3 rounded">
+                <p><strong>{{ comment.commenter }}</strong>: <span class="text-muted">{{ comment.time_stamp }}</span></p>
+                    {% if comment.selection %}
+                    <div class="alert alert-primary" onclick="findText('{{ comment.selection }}'); return false;"><i>{{ comment.selection }}</i></div>
+                    {% endif %}
+                    <p>{{ comment.content | safe }}</p>
+                </div>
+            {% endfor %}
+            <hr>
+        </div>
+    </div>
+
+    <div class="main">
+        <div id="paper" class="paper" style="font-size: small;">
+            {{ my_paper.content | safe }}
+        </div>
+        <div style="display: none;" id="editor">
+            {{ my_paper.content | safe }}
+        </div>
+    </div>
+
+    {% endif %}
+{% endblock %}
