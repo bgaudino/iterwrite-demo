@@ -1,1 +1,1 @@
-web: gunicorn iterwrite_.wsgi
+web: gunicorn iterwrite_demo.wsgi
