@@ -53,6 +53,9 @@
             <h2 class="medium">the twenty-first-century writing <span id="workshop">workshop</span></h2>
             <h1 class="large">iter<span id="w">(w)</span>rite</h1>
             <div id="forms">
+                {% if message %}
+                    <div class="alert alert-danger">{{ message }}</div>
+                {% endif %}
                 <div class="input-group">
                     <button id="login-button" class="btn btn-outline-light active">Login</button>
                     <button id="register-button" class="btn btn-outline-light">Register</button>
@@ -84,9 +87,6 @@
                     </div>
                     <input class="btn btn-primary" type="submit" value="Register">
                 </form>
-                {% if message %}
-                    <div class="alert-danger">{{ message }}</div>
-                {% endif %}
             </div>
         </div>
 
