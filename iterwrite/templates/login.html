@@ -84,6 +84,9 @@
                     </div>
                     <input class="btn btn-primary" type="submit" value="Register">
                 </form>
+                {% if message %}
+                    <div class="alert-danger">{{ message }}</div>
+                {% endif %}
             </div>
         </div>
 
