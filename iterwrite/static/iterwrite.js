@@ -98,3 +98,26 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
+function toggleSidebar() {
+    const sidebar = document.querySelector('#sidebar');
+    const toggle = document.querySelector('#toggle-sidebar');
+    const div = document.querySelector('#toggle-div');
+    if (sidebar.style.display != 'block') {
+        sidebar.style.animationDuration = '.25s';
+        sidebar.style.animarionIterationCount = '1';
+        sidebar.style.animationFillMode = 'forwards';
+        sidebar.style.animationName = 'sidebar';
+
+        sidebar.style.display = 'block';
+        div.style.backgroundColor = '#121212';
+        toggle.innerHTML = '<i class="fas fa-angle-double-left"></i>';
+        toggle.className = 'btn btn-danger';
+    } else {
+        div.style.backgroundColor = '#898989';
+        sidebar.style.display = 'none';
+        toggle.innerHTML = '<i class="fas fa-angle-double-right"></i>';
+        toggle.className = 'btn btn-info';
+    }
+
+}

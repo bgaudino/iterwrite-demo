@@ -23,6 +23,9 @@
         <script src="static/iterwrite.js"></script>
 	</head>
 	<body>
+        <div id="toggle-div">
+            <button id="toggle-sidebar" class="btn btn-info" onclick="toggleSidebar(); return false;"><i class="fas fa-angle-double-right"></i></button>
+        </div>
         <!-- sidebar -->
         <div id="sidebar"> 
             <a style="text-decoration: none; color: white;" href="{% url 'index' %}"><h1 class="text-center" style= "margin-bottom: 50px;">iter<span class="text-danger">(w)</span>rite</h1></a>

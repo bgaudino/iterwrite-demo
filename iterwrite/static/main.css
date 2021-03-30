@@ -1,10 +1,34 @@
 body {
-    font-family: 'Fira Code', monospace;
+    font-family: \'Fira Code\', monospace;
+}
+
+.comment {
+    background-color: #ffffff;
+    color: #121212;
+    margin: 4px;
 }
 
 .main {
     margin: 160px 20px 0 380px;
     overflow: hidden;
+}
+
+.nav-section {
+    margin: 20px 0;
+}
+
+.paper {
+    font-family: \'Montserrat\', sans-serif;
+}
+
+#comments {
+    overflow: scroll;
+    margin-top: 16px;
+    max-height: calc(50vh - 120px);
+}
+
+#compose {
+    height: 100vh;
 }
 
 #piece-header {
@@ -14,20 +38,14 @@ body {
     padding: 20px;
     top: 0;
     margin: 0;
-    background-image: linear-gradient(315deg, #bcbcbc 0%, #898989 74%);
+    background: linear-gradient(315deg, #bcbcbc 0%, #898989 74%);
     color: white;
     width: calc(100vw - 360px);
     z-index: 100;
 }   
 
-.paper {
-    font-family: 'Montserrat', sans-serif;
-}
-#compose {
-    height: 100vh;
-}
-
 #sidebar {
+    display: block;
     background-color: #121212;
     color: white;
     height: 100vh;
@@ -38,18 +56,44 @@ body {
     overflow: scroll;
 }
 
-.nav-section {
-    margin: 20px 0;
+#toggle-div {
+    background-color: #898989;
+    width: 100%;
+    display: none;
+    padding: 12px;
 }
 
-#comments {
-    overflow: scroll;
-    margin-top: 16px;
-    max-height: calc(50vh - 120px);
+@keyframes sidebar {
+    0% {
+        width: 0px;
+    }
+    100% {
+        width: 100vw;
+    }
 }
 
-.comment {
-    background-color: #ffffff;
-    color: #121212;
-    margin: 4px;
+@media (max-width: 600px) {
+    .main {
+        margin: 0;
+    }
+
+    #sidebar {
+        position: relative;
+        display: none;
+        width: 100vw;
+        height: 100vh;
+        z-index: 101;
+    }
+    
+    #piece-header {
+        position: relative;
+        margin: 0;
+        padding: 0;
+        left: 0;
+        width: 100vw;
+        background: #898989;
+    }
+    #toggle-div {
+        display: block;
+    };
 }
