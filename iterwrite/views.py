@@ -48,7 +48,12 @@ def index(request, paper_id=0, view='read', user_id=0):
 def upload(request):
     if request.method == 'POST':
         document = request.FILES['document']
-        result = mammoth.convert_to_html(document)
+        try:
+            result = mammoth.convert_to_html(document)
+        except:
+            return render(request, 'error.html', {
+                'message': 'Documents be must .docx'
+            })
         paper = Paper.objects.create(title=request.POST['title'], content=result.value, author=request.user)
         paper.save()
         return HttpResponseRedirect(reverse('index', kwargs={'paper_id': paper.id}))
